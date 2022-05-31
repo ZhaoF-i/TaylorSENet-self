@@ -25,7 +25,7 @@ def validate(network, eval_loader, weight, *criterion):
         ebar.start()
         for j, batch_eval in enumerate(eval_loader.get_dataloader()):
             features, mix_features_2k, labels = batch_eval[0].cuda(), batch_eval[-2].cuda(), batch_eval[1].cuda()
-            outputs = network(features, mix_features_2k)
+            outputs = network(features)
             loss = 0.
 
             loss = criterion[0](outputs, batch_eval)
