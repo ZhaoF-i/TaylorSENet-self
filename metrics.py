@@ -41,6 +41,8 @@ class Metrics(object):
         noise = int(name.split('/')[-1][idx[2] + 1:idx[3]])
         stoi_mix = stoi(clean, mix, sr)
         stoi_es = stoi(clean, est, sr)
+        # stoi_mix = stoi(clean, mix, sr, extended=True)
+        # stoi_es = stoi(clean, est, sr, extended=True)
 
         return [snr, noise, stoi_mix, stoi_es]
 

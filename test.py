@@ -8,7 +8,7 @@ import numpy as np
 from pathlib import Path
 from torch import nn
 from metrics import Metrics
-from networks.Two_Stage_CRN import NET_Wrapper
+from networks.TaylorSENet import NET_Wrapper
 from utils.Checkpoint import Checkpoint
 from utils.progressbar import progressbar as pb
 from utils.stft_istft import STFT
@@ -42,11 +42,11 @@ class Test(object):
             """------------------------------------modify  area------------------------------------"""
             with torch.no_grad():
                 est = network(mixture)
-                est = est[1]
+                est = est[0]
             # real = est[0] * torch.cos(est[2].permute(0, 2, 1))
             # imag = est[0] * torch.sin(est[2].permute(0, 2, 1))
             # est_speech = self.STFT.inverse(torch.stack([real, imag], 3))
-            est = est[0].data.cpu().numpy()
+            est = est.data.cpu().numpy()
             """------------------------------------modify  area------------------------------------"""
             if self.type == 'online':
                 clean_name = tt_lst[i][:-7] + 'clean.wav'
